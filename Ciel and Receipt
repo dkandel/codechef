@@ -1,0 +1,42 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace factorial
+{
+    class Program
+    {
+        
+        static void Main(string[] args)
+        {
+            
+            int input = int.Parse(Console.ReadLine());
+            for (int inp = 0; inp < input; inp++)
+            {
+                
+                int price = int.Parse(Console.ReadLine());
+                
+                Console.WriteLine(CalculateTotalMenus(price));
+            }
+
+            Console.ReadLine();
+        }
+
+        static int CalculateTotalMenus(int n)
+        {
+            int total = 0;
+            for (int i = 11; i >= 0; i--)
+            {
+                int pw2 =(int)Math.Pow(2, (double)i);
+                if (n >= pw2)
+                {
+                    total = total + n / pw2;
+                    n = n % pw2;
+                }
+            }
+            return total;
+        }
+        
+    }
+}
