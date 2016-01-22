@@ -1,0 +1,110 @@
+using System;
+using System.Text;
+namespace factorial
+{
+    class Program
+    {
+
+        static void Main(string[] args)
+        {
+
+            int T = int.Parse(Console.ReadLine());
+            for (int i = 0; i < T; i++)
+            {
+
+                //string[] line = Console.ReadLine().Split(new char[]{' '},StringSplitOptions.RemoveEmptyEntries);
+                //int a = int.Parse(line[0]);
+                //int b = int.Parse(line[1]);
+                int N = int.Parse(Console.ReadLine());
+                int[] arr = new int[N];
+                string[] line = Console.ReadLine().Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                for (int j = 0; j < N; j++)
+                {
+                    arr[j] = int.Parse(line[j]);
+                }
+               Sorting s = new Sorting();
+                arr = s.MergeSort(arr);
+                
+
+                Console.WriteLine(arr[0]+arr[1]);
+            }
+            Console.ReadLine();
+        }
+        
+
+        static int FindMin(int a, int b)
+        {
+            return a > b ? b : a;
+        }
+
+    }
+    public class Sorting
+    {
+        private int[] array;
+        private int[] tempMergArr;
+        private int length;
+
+        #region Merge Sort
+
+        public int[] MergeSort(int[] input)
+        {
+            this.array = input;
+            this.length = input.Length;
+            this.tempMergArr = new int[length];
+
+            if (input.Length <= 1)
+            {
+                return input;
+            }
+            else
+            {
+                return doMergeSort(0, length - 1);
+            }
+
+        }
+
+        public int[] doMergeSort(int left, int right)
+        {
+            if (right > left)
+            {
+                int mid = left + (right - left) / 2;
+                doMergeSort(left, mid);
+                doMergeSort(mid + 1, right);
+                return Merge(left, mid, right);
+
+            }
+            else
+            {
+                return null;
+            }
+
+
+        }
+
+        public int[] Merge(int left, int mid, int right)
+        {
+            for (int a = left; a <= right; a++)
+            {
+                tempMergArr[a] = array[a];
+            }
+
+            int i = left;
+            int j = mid + 1;
+            int k = left;
+
+            while (i <= mid && j <= right)
+            {
+                array[k++] = (array[j] < tempMergArr[i]) ? array[j++] : tempMergArr[i++];
+            }
+            while (i <= mid)
+            {
+                array[k++] = tempMergArr[i++];
+            }
+
+            return array;
+        }
+        #endregion
+
+    }
+
+}
