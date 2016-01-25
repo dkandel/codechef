@@ -1,0 +1,53 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Text;
+namespace factorial
+{
+    class Program
+    {
+
+        static void Main(string[] args)
+        {
+
+            int T = int.Parse(Console.ReadLine());
+            for (int i = 0; i < T; i++)
+            {
+                string S1 = Console.ReadLine();
+                string S2 = Console.ReadLine();
+                strongMatch(S1, S2);
+                
+            }
+            Console.ReadLine();
+        }
+        static void strongMatch(string a, string b)
+        {
+            char[] cS1 = a.ToCharArray();
+            char[] cS2 = b.ToCharArray();
+            int sMatch = 0;
+            int mMatch = 0;
+            for (int i = 0; i < a.Length;i++ )
+            {
+                char c1 = cS1[i];
+                char c2 = cS2[i];
+                if ((c1 != '?' && c2 != '?'))
+                {
+                    if(c1!=c2)
+                    mMatch++;
+                }
+                else
+                {
+                    sMatch++;
+                }
+            }
+            Console.WriteLine(mMatch + " " + (mMatch+sMatch));
+        }
+        
+        
+    }
+}
+        
+
+
+    
+
